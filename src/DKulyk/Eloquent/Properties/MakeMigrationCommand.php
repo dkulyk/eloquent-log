@@ -1,4 +1,6 @@
-<?php namespace DKulyk\Eloquent\Properties;
+<?php
+
+namespace DKulyk\Eloquent\Properties;
 
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Database\Migrations\MigrationCreator;
@@ -6,7 +8,6 @@ use Illuminate\Support\Composer;
 
 class MakeMigrationCommand extends BaseCommand
 {
-
     /**
      * The console command signature.
      *
@@ -92,5 +93,4 @@ class MakeMigrationCommand extends BaseCommand
 
         return parent::getMigrationPath();
     }
-
 }

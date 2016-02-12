@@ -1,12 +1,15 @@
-<?php namespace DKulyk\Eloquent;
+<?php
+
+namespace DKulyk\Eloquent;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Collection;
 
 /**
- * Class Logging
+ * Class Logging.
  *
  * @mixin Eloquent
+ *
  * @property Logging\Model[]|Collection $logs
  */
 trait Logging

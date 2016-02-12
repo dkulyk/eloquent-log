@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Collection;
 
 /**
- * Class Properties
+ * Class Properties.
  *
  * @mixed Eloquent
  */
 trait Properties
 {
     /**
-     * Property factory for this model instance
+     * Property factory for this model instance.
      *
      * @var Properties\Factory
      */
@@ -41,7 +41,7 @@ trait Properties
     }
 
     /**
-     * Get property factory for this model instance
+     * Get property factory for this model instance.
      *
      * @return Properties\Factory
      */
@@ -55,7 +55,7 @@ trait Properties
     }
 
     /**
-     * Get Values relationship
+     * Get Values relationship.
      *
      * @return Values
      */
@@ -77,12 +77,13 @@ trait Properties
     /**
      * Set a given attribute on the model.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
      *
-     * @return $this
      * @throws \InvalidArgumentException
      * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     *
+     * @return $this
      */
     public function setAttribute($key, $value)
     {
@@ -91,7 +92,6 @@ trait Properties
             $factory->setValue($key, $value);
 
             return $this;
-
         }
 
         return parent::setAttribute($key, $value);
@@ -112,8 +112,8 @@ trait Properties
     /**
      * Handle dynamic method calls into the model.
      *
-     * @param  string $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array  $parameters
      *
      * @return mixed
      */

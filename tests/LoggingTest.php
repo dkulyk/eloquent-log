@@ -16,6 +16,4 @@ class LoggingTest extends TestCase
         $contact = $contact->logs[0]->restore(true)->fresh();
         static::assertEquals('test2@example.com', $contact->email);
     }
-
-
 }

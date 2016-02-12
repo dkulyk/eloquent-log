@@ -1,4 +1,6 @@
-<?php namespace DKulyk\Eloquent;
+<?php
+
+namespace DKulyk\Eloquent;
 
 use DKulyk\Eloquent\Properties\Factory;
 use Illuminate\Foundation\Application;
@@ -37,7 +39,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->commands('command.eloquent-extra.logging-table');
         $this->commands('command.eloquent-extra.properties-table');
 
-        $types = (array)$this->app->make('config')->get('eloquent-extra.property_types', []);
+        $types = (array) $this->app->make('config')->get('eloquent-extra.property_types', []);
         foreach ($types as $type => $class) {
             Factory::registerType($type, $class);
         }

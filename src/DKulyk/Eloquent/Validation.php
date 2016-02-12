@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * Class Validation
+ * Class Validation.
  *
  * @mixed Eloquent
  */
@@ -36,7 +36,7 @@ trait Validation
     }
 
     /**
-     * Validation rules
+     * Validation rules.
      *
      * @return array
      */
@@ -58,7 +58,7 @@ trait Validation
     }
 
     /**
-     * Validate model attributes
+     * Validate model attributes.
      *
      * @return bool
      */
@@ -71,7 +71,7 @@ trait Validation
     }
 
     /**
-     * Set auto validation flag
+     * Set auto validation flag.
      *
      * @param bool $value
      */
@@ -81,7 +81,7 @@ trait Validation
     }
 
     /**
-     * Disable auto validation on save
+     * Disable auto validation on save.
      */
     public function disableAutoValidation()
     {

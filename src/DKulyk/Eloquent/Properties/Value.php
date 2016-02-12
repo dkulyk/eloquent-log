@@ -4,11 +4,10 @@ namespace DKulyk\Eloquent\Properties;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 
 /**
- * Class Value
+ * Class Value.
  *
  * @property int      $entity_id
  * @property int      $property_id
@@ -41,7 +40,7 @@ class Value extends Eloquent
     /**
      * Create a new Value model instance.
      *
-     * @param  array $attributes
+     * @param array $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -52,8 +51,8 @@ class Value extends Eloquent
     /**
      * Create a new model instance that is existing.
      *
-     * @param  array       $attributes
-     * @param  string|null $connection
+     * @param array       $attributes
+     * @param string|null $connection
      *
      * @return static
      */
@@ -65,7 +64,7 @@ class Value extends Eloquent
 
         $model = $instance->newInstance([], true);
         $model->setRelation('property', $property);
-        $model->setRawAttributes((array)$attributes, true);
+        $model->setRawAttributes((array) $attributes, true);
         $model->setConnection($connection ?: $this->connection);
 
         return $model;
@@ -74,7 +73,7 @@ class Value extends Eloquent
     /**
      * Set the keys for a save update query.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -91,7 +90,7 @@ class Value extends Eloquent
     }
 
     /**
-     * Get property relation
+     * Get property relation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

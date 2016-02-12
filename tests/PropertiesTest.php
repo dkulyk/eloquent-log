@@ -1,4 +1,5 @@
 <?php
+
 use DKulyk\Eloquent\Properties\Factory;
 use DKulyk\Eloquent\Properties\Values;
 
@@ -8,7 +9,6 @@ class PropertiesTest extends TestCase
      * @var Factory
      */
     protected $factory;
-
 
     public function setUp()
     {

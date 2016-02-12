@@ -3,14 +3,12 @@
 
 class ValidationTest extends TestCase
 {
-
     /** @test */
     public function validation_failed()
     {
         $contact = new ContactValidation();
         static::assertFalse($contact->validate());
         static::assertFalse($contact->save());
-
     }
 
     /** @test */
@@ -20,7 +18,6 @@ class ValidationTest extends TestCase
         $contact->email = 'test@example.com';
         static::assertTrue($contact->validate());
         static::assertTrue($contact->save());
-
     }
 
     /** @test */

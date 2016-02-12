@@ -96,7 +96,6 @@ class QueryScope implements Scope
                         $alias = 'eav_'.$column.'_'.++$i;
                         $fields[$alias] = $property;
                         $where['column'] = $alias.'.value';
-
                     }
                 } else {
                     $fields = array_merge($fields, $this->parseWhere($properties, $where['query']->wheres, $table));
@@ -106,6 +105,4 @@ class QueryScope implements Scope
 
         return $fields;
     }
-
-
 }
