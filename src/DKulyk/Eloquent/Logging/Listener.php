@@ -1,9 +1,11 @@
-<?php namespace DKulyk\Eloquent\Logging;
+<?php
+
+namespace DKulyk\Eloquent\Logging;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Listener
+ * Class Listener.
  */
 class Listener
 {
@@ -11,7 +13,7 @@ class Listener
     {
         $object->logs()->create([
             'type' => Model::CREATE,
-            'data' => $object->getAttributes()
+            'data' => $object->getAttributes(),
         ]);
     }
 
@@ -19,7 +21,7 @@ class Listener
     {
         $object->logs()->create([
             'type' => Model::UPDATE,
-            'data' => $object->getOriginal()
+            'data' => $object->getOriginal(),
         ]);
     }
 
@@ -27,7 +29,7 @@ class Listener
     {
         $object->logs()->create([
             'type' => Model::DELETE,
-            'data' => $object->getOriginal()
+            'data' => $object->getOriginal(),
         ]);
     }
 
@@ -35,7 +37,7 @@ class Listener
     {
         $object->logs()->create([
             'type' => Model::RESTORE,
-            'data' => $object->getOriginal()
+            'data' => $object->getOriginal(),
         ]);
     }
 }

@@ -1,19 +1,21 @@
-<?php namespace DKulyk\Eloquent\Logging;
+<?php
+
+namespace DKulyk\Eloquent\Logging;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * DtKt\Models\Log
+ * DtKt\Models\Log.
  *
  *
- * @property integer        $type
+ * @property int        $type
  * @property string         $object_type
- * @property integer        $object_id
+ * @property int        $object_id
  * @property \Carbon\Carbon $created_at
  * @property string         $data
- * @property integer        $owner_id
+ * @property int        $owner_id
  * @property-read Eloquent  $object
  */
 class Model extends Eloquent
@@ -68,7 +70,7 @@ class Model extends Eloquent
     /**
      * Create a new Eloquent model instance.
      *
-     * @param  array $attributes
+     * @param array $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -86,7 +88,7 @@ class Model extends Eloquent
     }
 
     /**
-     * Get restored model
+     * Get restored model.
      *
      * @param bool $save
      *

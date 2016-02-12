@@ -3,11 +3,11 @@
 namespace DKulyk\Eloquent\Properties\Relations;
 
 use DKulyk\Eloquent\Properties;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as BaseCollection;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection as BaseCollection;
 
 class Values extends HasOneOrMany
 {
@@ -71,8 +71,8 @@ class Values extends HasOneOrMany
     /**
      * Initialize the relation on a set of models.
      *
-     * @param  array  $models
-     * @param  string $relation
+     * @param array  $models
+     * @param string $relation
      *
      * @return array
      */
@@ -108,9 +108,9 @@ class Values extends HasOneOrMany
     /**
      * Match the eagerly loaded results to their parents.
      *
-     * @param  Eloquent[]|Properties[] $models
-     * @param  Collection              $results
-     * @param  string                  $relation
+     * @param Eloquent[]|Properties[] $models
+     * @param Collection              $results
+     * @param string                  $relation
      *
      * @return array
      */

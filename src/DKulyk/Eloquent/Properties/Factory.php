@@ -40,26 +40,26 @@ final class Factory
      */
     public static function getPropertiesByEntity($entity)
     {
-        if (Factory::$allProperties === null) {
+        if (self::$allProperties === null) {
             $properties = Property::all();
-            Factory::$allPropertiesById = $properties->keyBy('id');
-            Factory::$allProperties = $properties->groupBy('entity')->map(
+            self::$allPropertiesById = $properties->keyBy('id');
+            self::$allProperties = $properties->groupBy('entity')->map(
                 function (Collection $properties) {
                     return $properties->keyBy('name');
                 }
             );
             //$properties->load('values');
         }
-        $entity = ($entity instanceof Eloquent ? $entity : new $entity);
+        $entity = ($entity instanceof Eloquent ? $entity : new $entity());
         $entity = $entity->getMorphClass();
 
-        $properties = Factory::$allProperties->get($entity);
+        $properties = self::$allProperties->get($entity);
 
         return $properties ?: $properties[$entity] = new Collection();
     }
 
     /**
-     * Get property by ID
+     * Get property by ID.
      *
      * @param $id
      *
@@ -67,7 +67,7 @@ final class Factory
      */
     public static function getPropertyById($id)
     {
-        return Factory::$allPropertiesById->get($id);
+        return self::$allPropertiesById->get($id);
     }
 
     /**
@@ -79,13 +79,13 @@ final class Factory
     public static function registerType($type, $class)
     {
         if (is_string($class) && class_exists($class)) {
-            $class = new $class;
+            $class = new $class();
         }
         if (!$class instanceof Value) {
             throw new InvalidArgumentException('Type value must be Value instance or class name');
         }
 
-        Factory::$types[$type] = $class;
+        self::$types[$type] = $class;
     }
 
     /**
@@ -95,7 +95,7 @@ final class Factory
      */
     public static function getType($type)
     {
-        return Arr::get(Factory::$types, $type);
+        return Arr::get(self::$types, $type);
     }
 
     /**
@@ -107,9 +107,9 @@ final class Factory
      *
      * @return Property
      */
-    public static function addProperty($entity, $name, $type = Factory::TYPE_STRING, $multiple = false, $reference = null)
+    public static function addProperty($entity, $name, $type = self::TYPE_STRING, $multiple = false, $reference = null)
     {
-        $entity = $entity instanceof Eloquent ? $entity : new $entity;
+        $entity = $entity instanceof Eloquent ? $entity : new $entity();
         $property = new Property(
             [
                 'entity'   => $entity->getMorphClass(),
@@ -118,12 +118,12 @@ final class Factory
                 'multiple' => $multiple,
             ]
         );
-        if ($type === Factory::TYPE_REFERENCE) {
-            $reference = $reference instanceof Eloquent ? $reference : new $reference;
+        if ($type === self::TYPE_REFERENCE) {
+            $reference = $reference instanceof Eloquent ? $reference : new $reference();
             $property->reference = $reference->getMorphClass();
         }
         $property->save();
-        Factory::getPropertiesByEntity($property->entity)->put($name, $entity);
+        self::getPropertiesByEntity($property->entity)->put($name, $entity);
 
         return $property;
     }
@@ -139,7 +139,7 @@ final class Factory
     protected $entity;
 
     /**
-     * Entity values
+     * Entity values.
      *
      * @var Collection
      */
@@ -164,11 +164,11 @@ final class Factory
     {
         $this->entity = $entity;
         $this->values = new Collection();
-        $this->properties = Factory::getPropertiesByEntity($entity);
+        $this->properties = self::getPropertiesByEntity($entity);
     }
 
     /**
-     * Get factory properties
+     * Get factory properties.
      *
      * @return Collection|Property[]
      */
@@ -194,7 +194,7 @@ final class Factory
     }
 
     /**
-     * Set Values for entity
+     * Set Values for entity.
      *
      * @param Collection $values
      */
@@ -227,7 +227,7 @@ final class Factory
     }
 
     /**
-     * Get all property values
+     * Get all property values.
      *
      * @return Collection
      */
@@ -255,9 +255,10 @@ final class Factory
     }
 
     /**
-     * Get values as array
+     * Get values as array.
      *
-     * @param boolean $all
+     * @param bool $all
+     *
      * @return array
      */
     public function getValuesToArray($all = true)
@@ -280,13 +281,13 @@ final class Factory
                     );
                 }
 
-                return null;
+                return;
             }
         )->toArray();
     }
 
     /**
-     * Get property Value(s) by name
+     * Get property Value(s) by name.
      *
      * @param $key
      *
@@ -313,7 +314,7 @@ final class Factory
     public function getValueRelation($key)
     {
         $property = $this->getProperties()->get($key);
-        $instance = new Value;
+        $instance = new Value();
         $instance->setConnection($this->entity->getConnectionName());
 
         //Builder $query, Model $parent, $foreignKey, $localKey
@@ -327,7 +328,7 @@ final class Factory
     }
 
     /**
-     * Get property simple value by name
+     * Get property simple value by name.
      *
      * @param string $key
      *
@@ -359,7 +360,7 @@ final class Factory
         } elseif ($value instanceof Value) {
             return $value->getAttributeValue('value');
         } else {
-            return null;
+            return;
         }
     }
 
@@ -401,7 +402,7 @@ final class Factory
     }
 
     /**
-     * Add new Value to entity
+     * Add new Value to entity.
      *
      * @param Property $property
      * @param mixed    $value
@@ -410,7 +411,7 @@ final class Factory
      */
     public function addValue(Property $property, $value)
     {
-        $instance = Factory::getType($property->type);
+        $instance = self::getType($property->type);
         if ($instance !== null) {
             $v = $instance->newInstance([], false);
         } else {
@@ -437,7 +438,7 @@ final class Factory
     }
 
     /**
-     * Add property for delete values from entity
+     * Add property for delete values from entity.
      *
      * @param Property $property
      */
@@ -447,7 +448,7 @@ final class Factory
     }
 
     /**
-     * Save entity values
+     * Save entity values.
      *
      * @throws \Exception
      */
@@ -498,7 +499,7 @@ final class Factory
     }
 
     /**
-     * Delete entity values
+     * Delete entity values.
      *
      * @throws \InvalidArgumentException
      */
@@ -512,6 +513,5 @@ final class Factory
                 ->whereIn('property_id', $this->properties->pluck('id'))
                 ->delete();
         }
-
     }
 }

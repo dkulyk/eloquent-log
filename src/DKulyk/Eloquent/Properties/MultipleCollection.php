@@ -5,7 +5,7 @@ namespace DKulyk\Eloquent\Properties;
 use Illuminate\Support\Collection;
 
 /**
- * Class MultipleCollection
+ * Class MultipleCollection.
  */
 class MultipleCollection extends Collection
 {
@@ -32,7 +32,7 @@ class MultipleCollection extends Collection
     }
 
     /**
-     * Add new value to property
+     * Add new value to property.
      *
      * @param mixed $value
      */
